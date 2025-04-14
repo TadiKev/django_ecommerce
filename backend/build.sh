@@ -1,11 +1,24 @@
+#!/bin/bash
+set -e
 
+echo "Starting build process..."
 
-set -o errexit
+# Activate virtual environment if it exists (adjust path as needed)
+if [ -f "./venv/bin/activate" ]; then
+    source ./venv/bin/activate
+fi
 
+echo "Installing Python dependencies..."
+pip install -r backend/requirements.txt
 
-pip install -r requirements.txt
+echo "Applying database migrations..."
+python backend/manage.py migrate --noinput
 
-python manage.py migrate 
+echo "Collecting static files..."
+python backend/manage.py collectstatic --noinput
 
-python manage.py collectstatic --noinput
+# Optionally, you can also build your React frontend here:
+echo "Building React frontend..."
+cd frontend && npm install && npm run build && cd ..
 
+echo "Build process complete."

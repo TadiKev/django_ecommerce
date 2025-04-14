@@ -15,6 +15,9 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import os  
 
+# Load environment variables from .env file (do this early)
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,15 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4&zmwhujubz&46kh+k_p4(shke@8izy)15weh^4o8$%ehhlzkn'
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-4&zmwhujubz&46kh+k_p4(shke@8izy)15weh^4o8$%ehhlzkn")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
-
-# Load environment variable from .env file
-load_dotenv()
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")  # Example: "yourdomain.com,localhost"
 
 # Application definition
 
@@ -154,10 +154,10 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
 }
 
-FLUTTERWAVE_SECRET_KEY = "FLWSECK_TEST-57ab42ce500faaedfe22b3f03adc5678-X"
+FLUTTERWAVE_SECRET_KEY = os.getenv("FLUTTERWAVE_SECRET_KEY", "FLWSECK_TEST-57ab42ce500faaedfe22b3f03adc5678-X")
 
-PAYPAL_CLIENT_ID = "ARdgYBWt219Ou8oxSs9v5myDMJ2kx7GwgaTHOzmWY550I4v-chzHwf9fe65WG-XH5wWIX7ZhQpuIu-oS"
-PAYPAL_CLIENT_SECRET = "EAi97ponquuS9Bu7h0be1tRf6AMpdhtgoh8IPaaS3Si2Os3_nAjZ3V7wJQIo3_GYkHMUph-DbNYNMO1_"
-PAYPAL_MODE = "sandbox"
+PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID", "ARdgYBWt219Ou8oxSs9v5myDMJ2kx7GwgaTHOzmWY550I4v-chzHwf9fe65WG-XH5wWIX7ZhQpuIu-oS")
+PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET", "EAi97ponquuS9Bu7h0be1tRf6AMpdhtgoh8IPaaS3Si2Os3_nAjZ3V7wJQIo3_GYkHMUph-DbNYNMO1_")
+PAYPAL_MODE = os.getenv("PAYPAL_MODE", "sandbox")
 
 REACT_BASE_URL = os.getenv("REACT_BASE_URL", "http://localhost:5173")
