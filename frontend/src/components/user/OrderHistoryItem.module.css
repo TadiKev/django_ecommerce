@@ -1,0 +1,46 @@
+/* Styling for the order item container */
+.orderItem {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the product image */
+  .imgField {
+    width: 100%;
+    max-width: 80px;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Header styling */
+  h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  /* Muted text for price and other secondary information */
+  .text-muted {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  /* Spacing between columns */
+  .col-md-2 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Ensure the text in the center columns is properly aligned */
+  .text-center {
+    text-align: center;
+  }
+  
+  /* Add some space between the columns */
+  .row {
+    margin-bottom: 10px;
+  }
+  

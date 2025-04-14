@@ -1,0 +1,105 @@
+/* Profile image styling */
+.profileImage {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #6050DC;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Center the content (text, button, image) inside the card */
+  .textCenter {
+    text-align: center;
+  }
+  
+  /* Card header with background and text styling */
+  .card-header {
+    background-color: #6050DC;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  /* Card body for spacing and styling the content */
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* Style for the card itself */
+  .card {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Profile section title */
+  h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Text for muted content like email */
+  .text-muted {
+    color: #6c757d;
+  }
+  
+  /* Button styling */
+  .btn {
+    background-color: #6050DC;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Button hover effect */
+  .btn:hover {
+    background-color: #4a3bde;
+  }
+  
+  /* Layout adjustments for better responsiveness and spacing */
+  .row.mb-4 {
+    margin-bottom: 30px;
+  }
+  
+  .col-md-9 {
+    padding-left: 20px;
+  }
+  
+  .col-md-6 {
+    padding: 10px;
+  }
+  
+  .card-body p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-body p strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Small screen responsiveness adjustments */
+  @media (max-width: 768px) {
+    .col-md-3, .col-md-9 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .btn {
+      width: 100%;
+      padding: 12px 0;
+    }
+  }
+  

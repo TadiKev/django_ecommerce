@@ -1,0 +1,53 @@
+/* Apply margin to each card column */
+.col {
+    margin-bottom: 1rem;
+}
+
+/* Style for the link */
+.links {
+    text-decoration: none;
+}
+
+/* Style for the card container */
+.card {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+/* Style for the image wrapper */
+.cardImgWrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Style for the image itself */
+.cardImgTop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Style for the card body */
+.cardBody {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* Style for the card title */
+.cardTitle {
+    font-size: 1rem;
+    color: black;
+    margin-bottom: 0.25px;
+}
+
+/* Style for the card text (product price) */
+.cardText {
+    font-size: 0.9rem;
+    color: black;
+}

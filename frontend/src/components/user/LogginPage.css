@@ -1,0 +1,104 @@
+/* General Styling */
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container for login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Login Card */
+.login-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Title & Subtitle */
+.login-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.login-subtitle {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+/* Form Fields */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    text-align: left;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Links */
+.login-footer {
+    margin-top: 20px;
+}
+
+.login-footer p {
+    font-size: 0.9rem;
+}
+
+.login-footer a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.login-footer a:hover {
+    color: #0056b3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 500px) {
+    .login-card {
+        padding: 1.5rem;
+        width: 90%;
+    }
+}
