@@ -11,3 +11,4 @@ cryptography==44.0.2
 paypalrestsdk==1.13.3
 requests==2.32.3
 Pillow==11.1.0
+shortuuid==1.0.11
