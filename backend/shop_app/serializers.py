@@ -37,7 +37,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
-    items = CartItemSerializer(many=True, read_only=True, source='cartitems')
+    items = CartItemSerializer(many=True, read_only=True, source='cart_items')  
     sum_total = serializers.SerializerMethodField()
     num_of_items = serializers.SerializerMethodField()
 
@@ -46,13 +46,13 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ["id", "cart_code", "items", "sum_total", "num_of_items", "created_at", "modified_at"]
 
     def get_sum_total(self, cart):
-        # Optimize the query by using `select_related` to avoid multiple queries for each cart item
-        cartitems = cart.cartitems.select_related('product')  # Efficient query for related product data
-        return sum(item.product.price * item.quantity for item in cartitems)
+        # CORRECTED: Use cart_items instead of cartitems
+        cart_items = cart.cart_items.select_related('product')
+        return sum(item.product.price * item.quantity for item in cart_items)
 
     def get_num_of_items(self, cart):
-        # Calculate the total number of items in the cart
-        return sum(item.quantity for item in cart.cartitems.all())
+        # CORRECTED: Use cart_items instead of cartitems
+        return sum(item.quantity for item in cart.cart_items.all())
 
 
 class SimpleCartSerializer(serializers.ModelSerializer):
@@ -95,16 +95,15 @@ class UserSerializer(serializers.ModelSerializer):
             "email", "city", "state", "address", "phone", "items"
         ]
 
-    def get_items(self, user):
-        # 💡 IMPROVED QUERY: Optimized with prefetch_related
-        transactions = Transaction.objects.filter(
-            user=user,
-            status='successful'
-        ).prefetch_related('cart__cartitems__product')
-        
-        # Get all cart items from successful transactions
-        cart_items = CartItem.objects.filter(
-            cart__in=[t.cart for t in transactions]
-        ).order_by('-cart__modified_at')[:10]
-        
-        return NewCartItemSerializer(cart_items, many=True).data
+def get_items(self, user):
+    transactions = Transaction.objects.filter(
+        user=user,
+        status='success' 
+    ).prefetch_related('cart__cart_items__product')
+    
+
+    cart_items = CartItem.objects.filter(
+        cart__in=[t.cart for t in transactions]
+    ).order_by('-cart__modified_at')[:10]
+    
+    return NewCartItemSerializer(cart_items, many=True).data
