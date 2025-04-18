@@ -15,6 +15,9 @@ from django.http import JsonResponse
 import logging
 import paypalrestsdk
 from django.conf import settings
+from django.contrib.auth import get_user_model
+User = get_user_model() 
+from django.contrib.auth.hashers import make_password
 
 BASE_URL = settings.REACT_BASE_URL 
 
@@ -30,6 +33,7 @@ from .serializers import (
     DetailedProductSerializer,
     CartItemSerializer,
     SimpleCartSerializer,
+    UserSerializer,
 )
 
 # View to get all products
@@ -182,7 +186,7 @@ def initiate_payment(request):
         cart_code = request.data.get("cart_code")
         cart = get_object_or_404(Cart, cart_code=cart_code)
 
-        amount = sum([item.quantity * item.product.price for item in cart.cartitems.all()])
+        amount = sum([item.quantity * item.product.price for item in cart.cart_items.all()])
         tax = Decimal("4.00")
         total_amount = amount + tax
         currency = "USD"
@@ -326,7 +330,7 @@ def initiate_paypal_payment(request):
         cart_code = request.data.get("cart_code")
         cart = Cart.objects.get(cart_code=cart_code)
         # Using 'cart.cartitems.all()' as used elsewhere in this codebase
-        amount = sum(item.product.price * item.quantity for item in cart.cartitems.all())
+        amount = sum(item.product.price * item.quantity for item in cart.cart_items.all())
         tax = Decimal("4.00")
         total_amount = amount + tax
 
@@ -432,3 +436,30 @@ def paypal_payment_callback(request):
         return Response({
             'error': 'Missing payment_id or payer_id in parameters.'
         }, status=400)
+
+@api_view(['POST'])
+def signup(request):
+    username = request.data.get('username')
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    if not all([username, email, password]):
+        return Response({'message': 'All fields are required'}, status=400)
+
+    # Use your CUSTOM User model (via get_user_model())
+    if User.objects.filter(username=username).exists():
+        return Response({'message': 'Username exists'}, status=400)
+
+    if User.objects.filter(email=email).exists():
+        return Response({'message': 'Email exists'}, status=400)
+
+    # Create user with your custom model's manager
+    user = User.objects.create_user(
+        username=username,
+        email=email,
+        password=password,
+        first_name=request.data.get('first_name', ''),  # Optional fields
+        last_name=request.data.get('last_name', '')
+    )
+
+    return Response({'message': 'User created'}, status=201)
